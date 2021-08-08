@@ -1,24 +1,31 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
-description: <a href="#">Affiliations</a>. Address. Contacts. Moto. Etc.
+description: at Nanyang Technological University, Singapore
+phd: Ph.D Student
 
 profile:
   align: right
-  image: prof_pic.jpg
-  address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+  image: IMG_0180.jpg
+  #   <p>555 your office number</p>
+  #   <p>123 your address street</p>
+  #   <p>Your City, State 12345</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com){:target="\_blank"}. You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+- NTU School of Computer Science and Engineering (SCSE)
+- Algorithm Researcher @ SenseTime Research
+- Sensetime-NTU Industrial Post-Graduate Program (IPP)
+- Email: daxuan001 [at] e.ntu.edu.sg
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I am currently a Ph.D student at the School of Computer Science and Engineering (SCSE) at Nanyang Technological University (NTU), Singapore. I am under the supervision of [Prof. Zheng Jianmin (NTU)](https://personal.ntu.edu.sg/asjmzheng/) and [Prof. Cai Jianfei (Monash University)](https://research.monash.edu/en/persons/jianfei-cai). I'm under the [Indistrial Post-Graduate Program (IPP)](https://www.ntu.edu.sg/graduate-college/admissions/programme/industrial-postgraduate-programme-(ipp)), which is a joint program between SenseTime and NTU initiated by Singapore Economic Development Board (EDB).
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/){:target="\_blank"} and [Academicons](https://jpswalsh.github.io/academicons/){:target="\_blank"}, like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+I received my bachelor degree in Computer Science from NTU in 2018. During my undergraduate study, I was also interested in High-Performance-Computing(HPC) and represented NTU to compete with other top universities around the globe in the [International Supercomputer Conference (ISC) Student Cluster Competetion](https://www.straitstimes.com/singapore/ntu-team-breaks-captcha-system-for-global-award) in Frankfurt, Germany, and [ACM/IEEE Supercomputer Conference (SC) Student Cluster Competetion](http://sc16.supercomputing.org/2016/11/02/singaporenanyangscc-student-cluster-competition-team-enigma-nanyang-technological-university-singapore/index.html) in Salt Lake City, USA.
+
+Prior to my Ph.D, I was a software engineer in Autodesk working on large-scale 3D Reconstruction Engine ([Autodesk ReCap Photo](https://www.autodesk.com.sg/products/recap/overview)) including Structure-from-Motion (SFM), Multi-View-Stereo (MVS) and Surface Reconstruction from 2017 to 2020.
+
+My research interests include Computer Vision, Computer Graphics and Deep Learning, especially 3D Computer Vision.

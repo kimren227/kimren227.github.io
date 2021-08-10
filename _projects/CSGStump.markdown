@@ -1,9 +1,9 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image
-img: /assets/img/3.jpg
-importance: 2
+title: CSG-Stump&#58; A Learning Friendly CSG-Like Representationfor Interpretable Shape Parsing
+description: 
+img: /assets/img/csgstump.gif
+importance: 1
 category: work
 ---
 

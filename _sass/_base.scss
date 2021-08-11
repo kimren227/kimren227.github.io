@@ -325,6 +325,7 @@ footer.sticky-bottom {
     &:hover {
       .card-title {
         color: var(--global-theme-color);
+        text-align: center;
       }
     }
   }
@@ -335,6 +336,7 @@ footer.sticky-bottom {
     }
     .card-title {
       color: $black-color;
+      text-align: center;
     }
   }
 

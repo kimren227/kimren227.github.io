@@ -51,7 +51,10 @@ category: work
         \end{equation}
         <br>
         <br>    
-        Thus U(x) ≡ 1 and ∅(x) ≡ 0. The complement of primitive object Oi can be defined by function Oic (x) = 1 − Oi (x), the intersection of k objects, 􏰂ki Oi ,by mini=1...k (Oi (x)), the union of k objects, 􏰁k Oi , by i p1∩p2=(p1∩p2)∪∅ p1 ∪p2 =(p1 ∩U)∪(p2 ∩U) maxi=1...k (Oi (x)), and the difference Oi − jects Oi and Oj by min (Oi (x), 1 − Oj (x)).
+        Thus U(x) ≡ 1 and ∅(x) ≡ 0. The complement of primitive object Oi can be defined by function: $$O_i^c(x)= 1-O_i(x)$$
+        the intersection of k objects: $$\min_{i = 1 \dots k}(O_i(x))$$
+        the union of k objects: $$ \max_{i = 1 \dots k}(O_i(x))$$
+        the difference of two objects: $$\min\left(O_i(x), 1-O_j(x)\right)$$
         <br>
         <br>  
         With the binary connection matrices WC , WI and WU , each node in the CSG-Stump structure can be defined by a certain function.
@@ -60,19 +63,25 @@ category: work
         For each node i = 1,···,K in the first layer, its shape Fi can be defined by function Fi(x):
         <br>
         <br>  
-        $$F_i(x) = W_C[1,i]\times (1-O_i(x)) + (1-W_C[1,i])O_i(x).$$
+        \begin{equation}\label{eq:Fi}
+        F_i(x) = W_C[1,i]\times (1-O_i(x)) + (1-W_C[1,i])O_i(x).
+        \end{equation}
         <br>
         <br> 
         For each node i = 1,···,C in the second layer, its shape Si is an intersection of nodes from the first layer, and can thus be defined by function Si(x):
         <br>
         <br>  
-        $$S_i(x) = \min_{1 \le j\le K}(W_{I}[j,i] \times F_j(x) + (1-W_{I}[j,i]) \times 1).$$
+        \begin{equation} \label{eq:Si}
+        S_i(x) = \min_{1 \le j\le K}(W_{I}[j,i] \times F_j(x) + (1-W_{I}[j,i]) \times 1).
+        \end{equation}
         <br>
         <br> 
         For the node in the third layer, its shape T is the union of nodes from the second layer, and can thus be defined by function T (x):
         <br>
         <br>  
-        $$T(x) =  \max_{1\le j\le C}(W_{U}[j,1] \times S_j(x) + (1-W_{U}[j,1]) \times 0).$$
+        \begin{equation}\label{eq:Tx}
+        T(x) =  \max_{1\le j\le C}(W_{U}[j,1] \times S_j(x) + (1-W_{U}[j,1]) \times 0).
+        \end{equation}
         <br>
         <br> 
         Now for a input shape given by a point cloud X = {xi}N consisting of a list of 3D points xi, we can first obtain the target shape occupancy Oi as aboved occupancy function O(x) and then detect the underlying primitives with a RANSAC-like method. Then reconstructing a CSG-like representation for the shape is simplified to finding the three connection matrices which can be formulated as a Binary Programming problem.
@@ -173,13 +182,15 @@ category: work
         <br>
         <br>
     </div>
-    <br>
-    <br>
+    <div>
     <br>
     <br>
     <video class="video-fluid" autoplay loop muted>
           <source src="/assets/img/video.mp4" type="video/mp4" />
     </video>
+    <br>
+    <br>
+    </div>
         
  
 </div>

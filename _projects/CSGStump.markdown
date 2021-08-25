@@ -51,11 +51,6 @@ category: work
 
 <br>
 
-```
-conda install
-```
-
-
 <h1>CSG-Stump Structure</h1>
 <div class="row justify-content-sm-left">
     <div>

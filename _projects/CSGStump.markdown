@@ -8,12 +8,36 @@ category: work
 ---
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/author.png' | relative_url }}" alt="" title="Authors"/>
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/authors.png' | relative_url }}" alt="" title="Authors"/>
     </div>
 </div>
 
 <br>
 <br>
+<center><video class="video-fluid" autoplay loop muted>
+        <source src="/assets/img/video.mp4" type="video/mp4" />
+</video></center>
+
+<table align="center" >
+<tbody><tr>		
+    </tr>
+    <tr>
+        <td width="100">
+        </td>
+        <td width="150">
+        <center>
+            <a href="" class="imageLink"><img src="/assets/img/arxiv.png" width="200"></a><br>
+        </center>
+        </td>
+        <td width="300">
+            <center>
+                <a href="https://github.com/kimren227/CSGStumpNet" class="imageLink"><img src="/assets/img/github.png" width="280"></a><br>
+            </center>
+        </td>
+        <td width="100">
+        </td>
+    </tr>    
+</tbody></table>
 
 <h1>Abstract</h1>
 <div class="row justify-content-sm-center">
@@ -26,6 +50,11 @@ category: work
 </div>
 
 <br>
+
+```
+conda install
+```
+
 
 <h1>CSG-Stump Structure</h1>
 <div class="row justify-content-sm-left">
@@ -185,16 +214,24 @@ category: work
     <div>
     <br>
     <br>
-    <video class="video-fluid" autoplay loop muted>
-          <source src="/assets/img/video.mp4" type="video/mp4" />
-    </video>
     <br>
     <br>
-    </div>
-        
- 
+    </div> 
 </div>
- 
+
+<!-- <h3>Acknowledgement</h3>
+<br>
+<br>
+<div class="col-sm-4 mt-3 mt-md-0">
+    The work is partially supported by a joint WASP/NTU project (04INS000440C130)
+</div> -->
+<h3>Acknowledgement</h3>
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        The work is partially supported by a joint WASP/NTU project (04INS000440C130)
+    </div>
+</div>
 
 
 

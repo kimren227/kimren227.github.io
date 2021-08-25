@@ -1,8 +1,8 @@
 ---
 layout: page
-title: Publications
-permalink: /publications/
-description: A growing collection of your cool projects.
+title: Projects
+permalink: /projects/
+description:
 nav: true
 display_categories:
 horizontal: true

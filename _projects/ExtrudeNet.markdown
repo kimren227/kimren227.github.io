@@ -2,21 +2,21 @@
 layout: page
 title: ExtrudeNet&#58; Unsupervised Inverse Sketch and Extrude for Shape Parsing
 description:  
-img: /assets/img/csgstump.gif
+img: /assets/img/ExtrudeNet/teaser_1.jpg
 importance: 1
 category: work
 ---
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/authors.png' | relative_url }}" alt="" title="Authors"/>
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/authors.png' | relative_url }}" alt="" title="Authors"/>
     </div>
 </div>
 
 <br>
 <br>
 <center><video class="video-fluid" autoplay loop muted>
-        <source src="/assets/img/video.mp4" type="video/mp4" />
+        <source src="/assets/img/ExtrudeNet/ExtrudeNet.mp4" type="video/mp4" />
 </video></center>
 
 <table align="center" >
@@ -27,12 +27,12 @@ category: work
         </td>
         <td width="150">
         <center>
-            <a href="https://arxiv.org/abs/2108.11305" class="imageLink"><img src="/assets/img/arxiv.png" width="200"></a><br>
+            <a href="https://arxiv.org/abs/2209.15632" class="imageLink"><img src="/assets/img/arxiv.png" width="200"></a><br>
         </center>
         </td>
         <td width="300">
             <center>
-                <a href="https://github.com/kimren227/CSGStumpNet" class="imageLink"><img src="/assets/img/github.png" width="280"></a><br>
+                <a href="https://github.com/kimren227/ExtrudeNet" class="imageLink"><img src="/assets/img/github.png" width="280"></a><br>
             </center>
         </td>
         <td width="100">
@@ -43,189 +43,176 @@ category: work
 <h1>Abstract</h1>
 <div class="row justify-content-sm-center">
     <div class="col-sm-7 mt-3 mt-md-0">
-        Generating an interpretable and compact representation of 3D shapes from point clouds is an important and challenging problem. This paper presents CSG-Stump Net, an unsupervised end-to-end network for learning shapes from point clouds and discovering the underlying constituent modeling primitives and operations as well. At the core is a three-level structure called CSG-Stump, consisting of a complement layer at the bottom, an intersection layer in the middle, and a union layer at the top. CSG-Stump is proven to be equivalent to CSG in terms of representation, therefore inheriting the interpretable, compact and editable nature of CSG while freeing from CSG's complex tree structures. Particularly, the CSG-Stump has a simple and regular structure, allowing neural networks to give outputs of a constant dimensionality, which makes itself deep-learning friendly. Due to these characteristics of CSG-Stump, CSG-Stump Net achieves superior results compared to previous CSG-based methods and generates much more appealing shapes, as confirmed by extensive experiments.
+        Sketch-and-extrude is a common and intuitive modeling process in computer aided design. This paper studies the problem of learning the shape given in the form of point clouds by inverse sketch-and-extrude. We present ExtrudeNet, an unsupervised end-to-end network for discovering sketch and extrude from point clouds. Behind ExtrudeNet are two new technical components: 1) an effective representation for sketch and extrude, which can model extrusion with freeform sketches and conventional cylinder and box primitives as well; and 2) a numerical method for computing the signed distance field which is used in the network learning. This is the first attempt that uses machine learning to reverse engineer the sketch-and-extrude modeling process of a shape in an unsupervised fashion. ExtrudeNet not only outputs a compact, editable and interpretable representation of the shape that can be seamlessly integrated into modern CAD software, but also aligns with the standard CAD modeling process facilitating various editing applications, which distinguishes our work from existing shape parsing research.
     </div>
     <div class="col-sm-5 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/CSG-Circuit_VS_CSG-Tree_vertical.png' | relative_url }}" alt="" title="example image"/>
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/teaser_1.jpg' | relative_url }}" alt="" title="example image"/>
     </div>
 </div>
 
-<br>
 
-<h1>CSG-Stump Structure</h1>
+<h1>ExtrudeNet Structure</h1>
 <div class="row justify-content-sm-left">
     <div>
-        In this paper, we propose CSG-Stump, a novel and systematic reformulation of CSG-Tree, a hierarchical 3D shapes representation with nodes storing operation information, but with fixed three layers. A complement layer is at the bottom, at which nodes store whether the complement operation is performed on their corresponding one-to-one primitives. An intersection layer is in the middle, at which nodes record which shapes generated in the bottom layer are selected for the intersection operation. A union layer with only one node is at the top, recording which shapes generated in the intersection layer are selected for the union operation. 
+        <div class="col-sm-16 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet//extrude_net_pipeline_1.jpg' | relative_url }}" alt="" title="example image"/>
+        </div>
+        We take inspiration from the process of sketch and extrude, a popular and intuitive approach widely used in the field of computer aided design (CAD) where engineers usually model shapes by first sketching a closed free form sketch (profile) in a 2D sketch plane and then extruding the sketch into 3D. 
+
+        To realize ExtrudeNet, we create three modular components: <b> 1) rBezierSketch</b> , which generates a simple closed curve (i.e.\ no self-intersection); <b> 2) Sketch2SDF </b> , a versatile numerical method for computing Signed-Distance-Field from parametric curves; and <b> 3)   </b> , a differentiable method for extruding 2D Signed-Distance-Field (SDF) into a 3D solid shape. Built upon these components, ExtrudeNet takes a point cloud as input and outputs sketch and extrude parameters which form a compact, interpretable and editable shape representation.
         <br>
-        <br>
-        We denote the whole space and the empty set by U and ∅ respectively. Therefore, the complement of a shape is implemented by the difference of the shape with U. Intersecting an object with U gives the object itself and the union of an object and ∅ returns the object itself. Specifically, we define a 1 × K matrix WC ∈ {0, 1}K for the complement layer, where K is the number of the primitives; a K × C matrix WI ∈ {0, 1}K ×C for the intersection layer, where C(≤ K) is the number of nodes in the intersection layer; and a C × 1 matrix WU ∈ {0, 1}C for the union layer. 
-        <br>
-        <br>
-        Each entry in these matrices takes a value of either 1 or 0. In particular, WC [1, i] = 0 or 1 encodes whether the shape of primitive i or its complement is used for node i of the complement layer. If WI [j, i] = 1, the shape from node j in the complement layer is selected for the intersection in node i of the intersection layer, and similarly, WU [j, 1] implies that the shape from node j in the intersection layer is selected for the union operation at the top layer. In this way, CSG-Stump represents a shape by a set of primitive shapes and three connection matrices. 
-        <br>
-        <br>
-        To facilitate shape analysis and problem formulation, we describe the nodes of CSG-Stump by mathematics functions. First, we define a shape O by an occupancy function O(x) : R3 → {0, 1} as follows:
-        <br>
-        <br>
-        \begin{equation} O(x) = \left\{
-        \begin{array}{ll} 
-        1, & x \;\;\text{is within the shape}\\
-        0, & \text{otherwise}
-        \end{array}
-        \right.
-        \end{equation}
-        <br>
-        <br>    
-        Thus U(x) ≡ 1 and ∅(x) ≡ 0. The complement of primitive object Oi can be defined by function: $$O_i^c(x)= 1-O_i(x)$$
-        the intersection of k objects: $$\min_{i = 1 \dots k}(O_i(x))$$
-        the union of k objects: $$ \max_{i = 1 \dots k}(O_i(x))$$
-        the difference of two objects: $$\min\left(O_i(x), 1-O_j(x)\right)$$
-        <br>
-        <br>  
-        With the binary connection matrices WC , WI and WU , each node in the CSG-Stump structure can be defined by a certain function.
-        <br>
-        <br>  
-        For each node i = 1,···,K in the first layer, its shape Fi can be defined by function Fi(x):
-        <br>
-        <br>  
-        \begin{equation}\label{eq:Fi}
-        F_i(x) = W_C[1,i]\times (1-O_i(x)) + (1-W_C[1,i])O_i(x).
-        \end{equation}
-        <br>
-        <br> 
-        For each node i = 1,···,C in the second layer, its shape Si is an intersection of nodes from the first layer, and can thus be defined by function Si(x):
-        <br>
-        <br>  
-        \begin{equation} \label{eq:Si}
-        S_i(x) = \min_{1 \le j\le K}(W_{I}[j,i] \times F_j(x) + (1-W_{I}[j,i]) \times 1).
-        \end{equation}
-        <br>
-        <br> 
-        For the node in the third layer, its shape T is the union of nodes from the second layer, and can thus be defined by function T (x):
-        <br>
-        <br>  
-        \begin{equation}\label{eq:Tx}
-        T(x) =  \max_{1\le j\le C}(W_{U}[j,1] \times S_j(x) + (1-W_{U}[j,1]) \times 0).
-        \end{equation}
-        <br>
-        <br> 
-        Now for a input shape given by a point cloud X = {xi}N consisting of a list of 3D points xi, we can first obtain the target shape occupancy Oi as aboved occupancy function O(x) and then detect the underlying primitives with a RANSAC-like method. Then reconstructing a CSG-like representation for the shape is simplified to finding the three connection matrices which can be formulated as a Binary Programming problem.
-        <br>
-        <br> 
-        let Ok(i) represents the occupancy value of testing point i for primitive k and T(i) represents the estimated occupancy of point i. The connection matrices WC,WI and WU for the selection process of CSG-Stump are the solution of the following minimization problem:
-        <br>
-        <br> 
-         $$ 
-         \small
-         \begin{align} 
-         \underset{W_{\{C,I,U\}}}{\text{min.}}& \quad   \frac{1}{N}\sum_i^N{\|T(i)-O_i\|}\nonumber\\
-         \textrm{s.t.}\quad
-         &T(i)=\max_j\{S_j(i) \times W_{U}[j,1] \}  \nonumber\\
-         &S_j(i)=\min_k\{F_{k}(i) \times W_{I}[k,j]+(1-W_I[k,j])\}  \nonumber\\
-         &F_k(i)=(1-O_{k}(i)) W_{C}[1,k] + {O}_{k}(i) (1-W_{C}[1,k])  \nonumber\\
-         &W_{I}, W_{U}, W_{C}\in\{0,1\},\;\; {O}_{k}(i)\in\{0,1\} 
-         \end{align} 
-         \normalsize
-         $$
-        <br> 
-        We prove that CSG-Stump is equivalent to typical CSG-Tree in terms of representation, i.e., we can represent anycomplex CSG shape by our three-layer CSG-Stump. Therefore, CSG-Stump inherits the ideal characteristics of CSG-Tree, allowing highly compact, interpretable and editable shape representation while freeing from the limitations of a tree structure. Moreover, CSG-Stump gives rise to two additional advantages: 1) High representation capability. The maximum representation capability can be realistically achieved with CSG-Stump, as opposed to a conventional CSG-Tree that needs many layers for complex shapes. 2) Deep learning-friendly. The consistent structure of CSG-Stump allows neural networks to give fixed dimension output, making network design much easier.
+       
    </div>
 </div>
 <br>
-<h1>CSG-Stump Net</h1>
+<h2>rBezierSketch</h2>
 <div class="row justify-content-sm-left">
-    <div class="col-sm-8 mt-3 mt-md-0">
-    When a relatively large number of primitives are required to represent a shape,  Binary Programming typically fails to obtain an optimal solution in polynomial time due to the combinational nature of the problem. We therefore propose a learning-based approach by designing CSG-StumpNet to jointly detect primitives and estimate CSG-Stump connections. As illustrated in the right figure, CSG-Stump Net first encodes a point cloud into a latent feature and then decodes it via the primitive head and the connection head respectively. Primitive head decodes latent features into a set of K parametric primitives where each parametric primitive is represented by intrinsic and extrinsic parameters. Connection head  decodes the encoded features into the connection matrices WC , WI and WU. Then we obatin occupancy by occupancy calculator which computes the primitive’s Signed Distance Field (SDF) first and then converts it to occupancy through sigmoid function Φ: \begin{equation} \label{eq:ox} O(x)=\Phi(-\eta \times SDF(x)), \end{equation} Given the predicted primitives occupancy and connection matrices, we finally calculate the occupancy of the overall shape using  CSG-Stump Constructor. We directly employ an off-the-shelf backbone, i.e. DGCNN, as the encoder. Note that our framework is fully compatible with other backbones as well. 
+    <div class="col-sm-16 mt-3 mt-md-0">
+    rBezierSketch is designed with the following benifits in mind.
+    <ul>
+        <li>Compatible with industry standards as it is a simple form of NURBS </li>
+        <li>It can represent straight lines, circles and free-form curves in a uniform representation</li>
+        <li>It represent a star-convex set and will not self intersect </li>
+        <li>It can be constraint to generate only C1 continuous sketch </li>
+    </ul>
+
+    The basic mathematical model is a closed curve formed by N curve segments defined by special rational cubic Bezier curves $$ C_k(t), t\in [0,1], k=0,1,\cdots,N-1 $$ 
+    The equation for each curve segment is:
+    $$ 
+        C_k(t) = \frac{P^k_0B_0^3(t)+ w^k_1 P^k_1B_1^3(t)+ w^k_2 P^k_2B_2^3(t)+ P^k_3B_3^3(t)}{B_0^3(t)+w^k_1 B_1^3(t)+ w^k_2B_2^3(t)+B_3^3(t)}
+    $$
+    We use the polar coordinate system to help define the control points P, where: 
+    $$ 
+        P^k_i = (x^k_i, y^k_i) = (\rho_i^k\cos(\alpha_i^k), \rho^k_i\sin(\alpha^k_i))
+    $$
+
+
+    $$ 
+        \alpha^k_1= \alpha^k_0+\theta,\;\; \alpha^k_3 = \alpha^k_0+\frac{2\pi}{N},\;\; \alpha^k_2 = \alpha^k_3-\theta
+    $$
+
+    $$ 
+        \displaystyle \theta =\frac{2\pi}{4N}+\tan^{-1}\left(\frac{1}{3}\tan\left(\frac{2\pi}{4N}\right)\right)
+    $$
+
+
+    These angles are specially designed to achieve the above stating benifits. (see paper for details)
+
+
     </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/CSG-Stumpt-Net.png' | relative_url }}" alt="" title="example image"/>
+    <div class="col-sm-16 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/circular_arc_c0_c1_1.jpg' | relative_url }}" alt="" title="example image"/>
     </div>
  </div> 
  <br>
  <br>
- <h1>Training</h1> 
+ <h1>Sketch2SDF</h1> 
  <div class="row justify-content-sm-left">
     <div>
-        We train CSG-Stump Net end-to-end in an unsupervised manner, without explicit ground truth. Instead, the supervision signal is quantified by the reconstruction loss between the predicted and ground truth occupancy as follows: \begin{equation} L_{recon} = \mathbb{E}_{x\sim X}||\hat{O}_i-O^*_i||_2^2. \end{equation}
-        <br>
-        <br>
-        We also propose a primitive loss to pull each primitive surface to its closest test point, which prevents the gradient from vanishing. We define this loss term as \begin{equation} L_{primitive} = \frac{1}{K}\sum_k^K \min_{n}SDF_{k}^2(x_n), \end{equation} where SDFk(xn) computes the SDF of test point xn to primitive k.
-        <br>
-        <br>
-        Finally, the overall objective can be defined as the joint loss of the above two terms: \begin{equation} L_{total} = L_{recon} + \lambda \cdot L_{primitive}, \end{equation} where the balance term λ is set to 0.001 empirically.
-    </div>
+        We present a numerical method for computing the SDF of simple parametric sketches. The method is general. While it applies to the rational cubic Bézier curves here, it also works for other parametric curves. This method also yields good gradients which is friendly for deep learning applications.
+        The SDF of a sketch is defined by the Distance-Field DF(p), the smallest distance from a given testing point p to the curve, multiplied by a sign SIGN(p) which indicates whether the testing point p is inside or outside of the sketch.
+        We first sample a set of sample points from the curve
+        $$
+        S =\left\{\left(x(\frac{i}{n}),y(\frac{i}{n})\right)\mid i=0,1,\cdots,n\right\}
+        $$
+        and the distance field can be approximated by
+        $$
+        DF(p)= \underset{s\in S}{\min} \|s-p\|_2
+        $$
+        the normal of each sample point is computed
+        $$
+        N(t) =  \left(\frac{d y(t)}{dt}, -\frac{d x(t)}{dt}\right)
+        $$
+        the sign can be computed as follow
+        $$
+        SIGN(p)= \frac{N(CT(p))\cdot (C(CT(p))-p)}{\|N(CT(p))\cdot (C(CT(p))-p)\|_2 + \epsilon}
+        $$
+        put them together, the final sdf is equal to
+        $$
+        SDF_s(p) = SIGN(p) \times DF(p). 
+        $$
 </div>
+
+ <h1>Extrusion</h1> 
+ <div class="row justify-content-sm-left">
+    <div>
+        We first transform the testing point p back to a point p' by reversing the transformations that transform the XY-plane to the target sketch plane. Then we compute the signed distance of p' with respect to the upright extrusion shape whose base lies on the XY-plane
+        If the testing point is inside the extruded shape
+        $$
+            SDF_i(p') = \max(\min(SDF_s((p'_x, p'_y)), h-p'_z, p'_z), 0)
+        $$
+        otherwise
+        $$
+        SDF_o(p') = -[
+        (\min(h-p'_z,0))^2+(\min(p'_z,0))^2
+        \mbox{} +(\min(SDF_s((p'_x, p'_y)),0))^2 ]^{\frac{1}{2}}
+        $$
+        Finally, the overall SDF is the sum of the two cases.
+        $$
+        SDF(p') = SDF_i(p') + SDF_o(p')
+        $$
+        
+</div>
+
 <br>
 <br>
-<h1>Evaluate CSG-Stump Net</h1> 
+<h1>Evaluation of rBezierSketch</h1> 
 <br>
 <br>
 <div class="row justify-content-sm-left">
-    <h3>Comparison on Statistic Evaluation Results</h3>
+    <h3>Approximability</h3>
     <div>
-        We evaluate results on the L2 Chamfer Distance between 2048 sampled points on a reconstructed shape and those on the corresponding ground truth following UCSG-Net. The quantitative results are reported in the following table. Note that results of VP, SQ and UCSGNet are using reported results in UCSG-Net. We can see that CSG-Stump Net outperforms both kinds of methods and improve previous SOTA results by over 9%.
+        To demonstrate the approximation ability and the ease of learning of the proposed rBezierSketch, we conduct a fitting experiment that directly optimize for the radial coordinate that best reconstructs a given raster emoji image.
         <br>
         <br>
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/statistic_evaluation_results.png' | relative_url }}" alt="" title="evaluation result image"/>
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/2d_experiments_1.jpg' | relative_url }}" alt="" title="evaluation result image"/>
         <br>
         <br>
+        <br>
+        <br>
+    </div>
+    <h3>Versatility and error analysis</h3>
+    <br>
+    <br>
+    <div class="col-sm-8 mt-3 mt-md-0">
+        To show the versatility, we implemented four different kinds of parametric curves, namely polygon, ellipse, Cubic Bezier Sketchs with C1 and C0 continuity. Note that our method is not limited to these curves, and can be easily adapted to new parametric curve types. We also plot the error introduced by apprimation by comparing our results with analytical results.
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/sketch2sdf_analysis_1.jpg' | relative_url }}" alt="" title="example image"/>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>
+    <h3>Edibility of Sketch and Extrude</h3>
+    <br>
+    <br>
+    <div class="col-sm-8 mt-3 mt-md-0">
+       As rBezier sketch is essentially a cubic rational bezier curve and Extrusion is a typical operation for B-Rep representation, our results are well compatiable to popular CAD software. 
+    </div>
+    <div class="col-sm-4 mt-3 mt-md-0">
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/edit_fusion.png' | relative_url }}" alt="" title="example figure"/>
         <br>
         <br>
     </div>
     <h3>Comparison on Geometric Evaluation Results</h3>
     <div>
-        The following figure shows the qualitative comparison with the CSG-like counterpart, i.e. UCSG-Net We can see our method achieves much better geometry approximation and structure decomposition in comparison to oracle shapes.
+        The following figure shows the qualitative comparison with baselines, We can see our method achieves better geometry approximation with fewer primitives.
          <br>
          <br>
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/geometry_evaluation_results.png' | relative_url }}" alt="" title="evaluation result image"/>
+        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/ExtrudeNet/compare_baselines_1.jpg' | relative_url }}" alt="" title="evaluation result image"/>
     <br>
     <br>
     <br>
     <br>
     </div>
-    <h3>Performance on Compactness</h3>
-    <br>
-    <br>
-    <div class="col-sm-8 mt-3 mt-md-0">
-        The right figure shows the generated CSG-stump structures of the car and lamp examples. We can see that only a small subset of intersection nodes are used to construct the final shape, which suggests the obtained structure is compact. Interestingly, the automatically learned intersection nodes are consistent to semantic part decomposition of car and lamp, which may be useful for other tasks such as part segmentation.
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/Performance on Compactness.png' | relative_url }}" alt="" title="example image"/>
-    <br>
-    <br>
-    <br>
-    <br>
-    </div>
-    <h3>Performance on Editability</h3>
-    <br>
-    <br>
-    <div class="col-sm-8 mt-3 mt-md-0">
-       As CSG-Stump is equivalent to CSG, we are allowed to edit primitives and CSG-Stump connections for further designs. Specifically, we implemented a simple adaptor to convert our outputs to the input format of OpenSCAD files, where OpenSCAD is an open-sourced CAD software. By leveraging OpenSCAD’s editing user interface and CSG-Stump Net, a user can achieve a design aim directly based on a point cloud.
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        <img class="img-fluid rounded z-depth-1" src="{{ '/assets/img/Performance on Editability2.png' | relative_url }}" alt="" title="example figure"/>
-        <br>
-        <br>
-    </div>
-    <div>
-    <br>
-    <br>
-    <br>
-    <br>
-    </div> 
 </div>
 
-<!-- <h3>Acknowledgement</h3>
-<br>
-<br>
-<div class="col-sm-4 mt-3 mt-md-0">
-    The work is partially supported by a joint WASP/NTU project (04INS000440C130)
-</div> -->
 <h3>Acknowledgement</h3>
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        The work is partially supported by a joint WASP/NTU project (04INS000440C130)
+        The work is partially supported by a joint WASP/NTU project (04INS000440C130), Monash FIT Startup Grant, and SenseTime Gift Fund.
     </div>
 </div>
 

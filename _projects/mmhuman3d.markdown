@@ -3,7 +3,7 @@ layout: page
 title: MMHuman3D&#58; an open-source codebase for the use of 3D human parametric models. 
 description:  
 img: /assets/img/mmhuman3d-demo-logo.gif
-importance: 1
+importance: 6
 redirect: https://github.com/open-mmlab/mmhuman3d
 category: work
 ---

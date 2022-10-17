@@ -3,7 +3,7 @@ layout: page
 title: Playing for 3D Human Recovery
 description:  
 img: /assets/img/2021_play3dhuman.png
-importance: 1
+importance: 4
 redirect: https://caizhongang.github.io/projects/GTA-Human/
 category: work
 ---

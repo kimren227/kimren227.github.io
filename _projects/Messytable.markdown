@@ -3,7 +3,7 @@ layout: page
 title: MessyTable&#58; Instance Association in Multiple Camera Views
 description:  
 img: /assets/img/messytable.png
-importance: 1
+importance: 7
 redirect: https://caizhongang.github.io/projects/MessyTable/
 category: work
 ---

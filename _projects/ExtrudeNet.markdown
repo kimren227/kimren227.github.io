@@ -3,7 +3,7 @@ layout: page
 title: ExtrudeNet&#58; Unsupervised Inverse Sketch and Extrude for Shape Parsing
 description:  
 img: /assets/img/ExtrudeNet/teaser_1.jpg
-importance: 1
+importance: 96
 category: work
 ---
 

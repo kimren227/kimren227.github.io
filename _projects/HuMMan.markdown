@@ -4,7 +4,7 @@ title: HuMMan&#58; Multi-Modal 4D Human Dataset for Versatile Sensing and Modeli
 
 description:  
 img: /assets/img/2022_humman.png
-importance: 2
+importance: 96
 redirect: https://caizhongang.github.io/projects/HuMMan/
 category: work
 ---

@@ -3,7 +3,7 @@ layout: page
 title: CSG-Stump&#58; A Learning Friendly CSG-Like Representation for Interpretable Shape Parsing
 description:  
 img: /assets/img/csgstump.gif
-importance: 5
+importance: 99
 category: work
 ---
 <div class="row">

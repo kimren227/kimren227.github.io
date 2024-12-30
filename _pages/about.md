@@ -18,8 +18,9 @@ social: true  # includes social icons at the bottom of the page
 ---
 
 - NTU School of Computer Science and Engineering (SCSE)
-- Algorithm Researcher @ SenseTime Research
-- Sensetime-NTU Industrial Post-Graduate Program (IPP)
+- Principal Software Engineer @ Autodesk
+- Ex-Algorithm Researcher @ SenseTime Research
+- Ex-Sensetime-NTU Industrial Post-Graduate Program (IPP)
 - Email: daxuan001 [at] e.ntu.edu.sg
 
 I am currently a Principal Software Development Engineer at Autodesk and a Ph.D. student in the College of Computing and Data Science at Nanyang Technological University (NTU), Singapore. I am supervised by [Prof. Zheng Jianmin (NTU)](https://personal.ntu.edu.sg/asjmzheng/) and [Prof. Cai Jianfei (Monash University)](https://research.monash.edu/en/persons/jianfei-cai). I was previously part of the [Indistrial Post-Graduate Program (IPP)](https://www.ntu.edu.sg/graduate-college/admissions/programme/industrial-postgraduate-programme-(ipp)), a joint initiative between SenseTime and NTU under the Singapore Economic Development Board (EDB).

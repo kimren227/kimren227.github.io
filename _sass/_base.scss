@@ -8,11 +8,16 @@ p, h1, h2, h3, h4, h5, h6, em, div, span, strong {
   color: var(--global-text-color);
 }
 
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
 a, table.table a {
   color: var(--global-theme-color);
+  transition: color 0.2s ease;
   &:hover {
-    color: var(--global-theme-color);
-    text-decoration: underline;
+    color: var(--global-hover-color);
+    text-decoration: none;
   }
   &:hover:after :not(.nav-item.dropdown) {
     width: 100%;
@@ -21,7 +26,7 @@ a, table.table a {
 
 blockquote {
   background: var(--global-bg-color);
-  border-left: 2px solid var(--global-theme-color);
+  border-left: 3px solid var(--global-theme-color);
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   font-size: 1.2rem;
@@ -54,6 +59,16 @@ blockquote {
   margin-left: 2.5rem;
   margin-bottom: 2rem;
   width: 100%;
+
+  img {
+    border-radius: 12px;
+    box-shadow: var(--global-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+  }
 
   .address {
     margin-bottom: 5px;
@@ -92,12 +107,18 @@ blockquote {
 
 .navbar {
   box-shadow: none;
-  border-bottom: 1px solid $grey-color-light;
+  border-bottom: 1px solid var(--global-border-color);
   background-color: var(--global-bg-color);
-  opacity: 0.95;
+  opacity: 0.98;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: box-shadow 0.3s ease;
 }
 .navbar .dropdown-menu {
   background-color: var(--global-bg-color);
+  border: 1px solid var(--global-border-color);
+  border-radius: 8px;
+  box-shadow: var(--global-shadow);
   a:not(.active) {
     color: var(--global-text-color);
   }
@@ -109,7 +130,7 @@ blockquote {
   color: var(--global-text-color);
     &:hover {
       color: var(--global-hover-color);
-      background-color: var(--global-bg-color);
+      background-color: var(--global-card-bg-color);
     }
 }
 .navbar.navbar-light {
@@ -120,9 +141,12 @@ blockquote {
   }
   .navbar-brand {
     color: var(--global-text-color);
+    font-weight: 600;
   }
   .navbar-nav .nav-item .nav-link {
     color: var(--global-text-color);
+    transition: color 0.2s ease;
+    position: relative;
     &:hover {
       color: var(--global-hover-color);
     }
@@ -191,29 +215,53 @@ blockquote {
 
 // News
 
-.news table td {
-  font-size: 1rem;
-  color: var(--global-text-color);
-}
+.news {
+  h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
 
-.news table th {
-  color: var(--global-text-color);
+  table {
+    td {
+      font-size: 1rem;
+      color: var(--global-text-color);
+      padding: 0.6rem 0.75rem;
+    }
+    th {
+      color: var(--global-theme-color);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.75rem;
+      white-space: nowrap;
+    }
+    tr {
+      transition: background-color 0.15s ease;
+      border-radius: 6px;
+      &:hover {
+        background-color: var(--global-card-bg-color);
+      }
+    }
+  }
 }
 
 // Social (bottom)
 
 .social {
   text-align: center;
+  margin-top: 2rem;
   .contact-icons {
-    font-size: 4rem;
+    font-size: 3rem;
     a {
+      margin: 0 0.4rem;
       i::before {
-        color: var(--global-text-color);
-        -webkit-transition: all 0.2s ease-in-out;
+        color: var(--global-text-color-light);
+        -webkit-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
       }
       &:hover {
         i::before {
           color: var(--global-theme-color);
+          transform: translateY(-2px);
         }
       }
     }
@@ -243,7 +291,7 @@ footer.fixed-bottom {
 }
 
 footer.sticky-bottom {
-  border-top: 1px solid $grey-color-light;
+  border-top: 1px solid var(--global-border-color);
   padding-top: 40px;
   padding-bottom: 40px;
   font-size: 0.9rem;
@@ -253,7 +301,7 @@ footer.sticky-bottom {
 // Blog
 
 .header-bar {
-  border-bottom: 1px solid $grey-color-light;
+  border-bottom: 1px solid var(--global-border-color);
   text-align: center;
   padding-top: 2rem;
   padding-bottom: 5rem;
@@ -268,7 +316,7 @@ footer.sticky-bottom {
   margin-bottom: 40px;
   padding: 0;
   li {
-    border-bottom: 1px solid $grey-color-light;
+    border-bottom: 1px solid var(--global-border-color);
     list-style: none;
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -331,6 +379,15 @@ footer.sticky-bottom {
   }
 
   .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: var(--global-shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
     img {
       width: 100%;
     }
@@ -356,8 +413,8 @@ footer.sticky-bottom {
   }
 
   h2.category {
-    color: $grey-color-light;
-    border-bottom: 1px solid $grey-color-light;
+    color: var(--global-text-color-light);
+    border-bottom: 1px solid var(--global-border-color);
     padding-top: 0.5rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -379,13 +436,14 @@ footer.sticky-bottom {
   }
   h2 {
     margin-bottom: 1rem;
+    font-weight: 700;
     span {
       font-size: 1.5rem;
     }
   }
   h2.year {
-    color: $grey-color-light;
-    border-top: 1px solid $grey-color-light;
+    color: var(--global-text-color-light);
+    border-top: 1px solid var(--global-border-color);
     padding-top: 1rem;
     margin-top: 2rem;
     margin-bottom: -2rem;
@@ -397,7 +455,16 @@ footer.sticky-bottom {
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      background-color: var(--global-card-bg-color);
+      border: 1px solid transparent;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      &:hover {
+        border-color: var(--global-border-color);
+        box-shadow: var(--global-shadow);
+      }
       .abbr {
         height: 2rem;
         margin-bottom: 0.5rem;
@@ -406,6 +473,8 @@ footer.sticky-bottom {
           background-color: var(--global-theme-color);
           padding-left: 1rem;
           padding-right: 1rem;
+          border-radius: 4px;
+          font-size: 0.85rem;
           a {
             color: white;
             &:hover {
@@ -418,8 +487,22 @@ footer.sticky-bottom {
           border: 1px solid var(--global-theme-color);
         }
       }
+      .pub-row {
+        align-items: flex-start;
+      }
+      .pub-preview {
+        text-align: center;
+        padding-top: 0.25rem;
+      }
+      .pub-thumbnail {
+        width: 100%;
+        max-width: 200px;
+        border-radius: 6px;
+        object-fit: cover;
+      }
       .title {
         font-weight: bolder;
+        font-size: 1.05rem;
       }
       .author {
         a {
@@ -432,19 +515,25 @@ footer.sticky-bottom {
         > em {
           border-bottom: 1px solid;
           font-style: normal;
+          font-weight: 600;
         }
       }
       .links {
+        margin-top: 0.5rem;
         a.btn {
           color: var(--global-text-color);
-          border: 1px solid var(--global-text-color);
+          border: 1px solid var(--global-border-color);
           padding-left: 1rem;
           padding-right: 1rem;
           padding-top: 0.25rem;
           padding-bottom: 0.25rem;
+          border-radius: 6px;
+          font-size: 0.85rem;
+          transition: all 0.2s ease;
           &:hover {
             color: var(--global-theme-color);
             border-color: var(--global-theme-color);
+            background-color: rgba(108, 92, 231, 0.05);
           }
         }
       }
@@ -482,6 +571,7 @@ footer.sticky-bottom {
       }
       div.abstract.hidden.open {
         border-color: var(--global-text-color);
+        border-radius: 6px;
       }
     }
   }

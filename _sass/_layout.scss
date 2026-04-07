@@ -6,6 +6,8 @@
    padding-bottom: 70px;
    color: var(--global-text-color);
    background-color: var(--global-bg-color);
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
  }
 
  body.fixed-top-nav {
@@ -29,7 +31,91 @@
   }
 }
 
-// TODO: redefine content layout.
+// Bio content
+.bio-content {
+  p {
+    line-height: 1.75;
+  }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding: 0.2rem 0;
+      position: relative;
+      padding-left: 1.2rem;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.65rem;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--global-theme-color);
+      }
+    }
+  }
+}
+
+// Research highlights
+.research-highlights {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2.5rem 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--global-border-color);
+  border-bottom: 1px solid var(--global-border-color);
+
+  .highlight-item {
+    text-align: center;
+    padding: 0.5rem 1.5rem;
+
+    .highlight-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--global-theme-color);
+      line-height: 1.2;
+    }
+
+    .highlight-label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--global-text-color-light);
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .research-highlights {
+    gap: 0.5rem;
+    .highlight-item {
+      padding: 0.5rem 0.75rem;
+      .highlight-number {
+        font-size: 1.5rem;
+      }
+      .highlight-label {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}
+
+// Post header
+.post-header {
+  .post-title {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .desc {
+    color: var(--global-text-color-light);
+    font-size: 1rem;
+  }
+}
 
 
 /******************************************************************************

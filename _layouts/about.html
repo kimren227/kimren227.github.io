@@ -9,7 +9,6 @@ layout: default
      {% if site.title == "blank" %}<span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} <span class="font-weight-bold">{{ site.last_name }}</span>{% else %}{{ site.title }}{% endif %}
     </h1>
      <p class="desc"> <span class="font-weight-bold">{{ page.phd }}</span> {{ page.description }}</p>
-     <!-- <p class="desc">{{ page.description }}</p> -->
   </header>
 
   <article style="text-align:justify">
@@ -26,10 +25,8 @@ layout: default
     </div>
     {% endif %}
 
-    <div class="clearfix">
-      <p >
+    <div class="clearfix bio-content">
       {{ content }}
-      </p>
     </div>
 
     {% if page.news %}

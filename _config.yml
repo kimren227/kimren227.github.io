@@ -14,7 +14,7 @@ footer_text: >
   Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
   # Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
 
-icon: 🎾 # the emoji used as the favicon
+icon: ⛳ # the emoji used as the favicon
 url:  # the base hostname & protocol for your site
 baseurl:  # the subpath of your site, e.g. /blog/
 last_updated: false # set to true if you want to display last updated in the footer
@@ -34,7 +34,7 @@ navbar_fixed: true
 footer_fixed: true
 
 # Dimensions
-max_width: 800px
+max_width: 850px
 
 # TODO: add layout settings (single page vs. multi-page)
 
@@ -153,8 +153,8 @@ github: [metadata]
 
 scholar:
 
-  last_name: Einstein
-  first_name: [Albert, A.]
+  last_name: Ren
+  first_name: [Daxuan, D.]
 
   style: apa
   locale: en
